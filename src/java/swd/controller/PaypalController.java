@@ -57,7 +57,7 @@ public class PaypalController extends HttpServlet {
                     CartObj cart = (CartObj) session.getAttribute("CART");
                     Transaction transaction = payment.getTransactions().get(0);
                     OrderDTO order = new OrderDTO(orderID, loginUser.getId(),
-                            payerInfo.getFirstName() + payerInfo.getLastName(), payerInfo.getPhone(),
+                            payerInfo.getFirstName() + payerInfo.getLastName(), loginUser.getPhone(),
                             transaction.getItemList().getShippingAddress().getLine1());
                     order.setStatus("Confirmed");
                     order.setTotal(cart.getTotal());

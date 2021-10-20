@@ -38,7 +38,7 @@ CREATE TABLE PRODUCT
 )
 CREATE TABLE PAYMENT
 (
-	id varchar(10),
+	id varchar(10) PRIMARY KEY,
 	paymentMethod varchar(30),
 )
 CREATE TABLE ORDER_PRODUCT
@@ -50,7 +50,7 @@ CREATE TABLE ORDER_PRODUCT
 	phone varchar(12),
 	shipAddress varchar(200),
 	total float,
-	status varchar(20),
+	status varchar(30),
 )
 CREATE TABLE PAYMENT_DETAIL 
 (
@@ -113,7 +113,7 @@ BEGIN
 	                   FROM inserted)
 	 SET @idReceiver=(SELECT customer
 	                   FROM inserted)
-	SET @content=N'Order #'+@orderID+' successfully checkout at '+@buyDate
+	SET @content=N'Order #'+@orderID+' successfully checkout at '+convert(nvarchar(MAX), @buyDate, 7)
 	INSERT INTO Notification(idReceiver, content)
 	VALUES(@idReceiver, @content)
 END
