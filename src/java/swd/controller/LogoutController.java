@@ -34,6 +34,7 @@ public class LogoutController extends HttpServlet {
         try {
             HttpSession session=request.getSession();
             session.removeAttribute("USER");
+            session.removeAttribute("CART");
         } catch (Exception e) {
             log("ERROR at LogoutController: "+e.getMessage());
         }finally{

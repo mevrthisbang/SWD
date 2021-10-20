@@ -17,9 +17,9 @@ import org.apache.http.client.fluent.Request;
  * @author mevrthisbang
  */
 public class GoogleUtils {
-    public static String GOOGLE_CLIEND_ID = "939804373285-dosi8pg5biocp08k7id7d35o1iarj0fm.apps.googleusercontent.com";
-    public static String GOOGLE_CLIENT_SECRET = "EJ5xziATB2X85lc2g93Z-ooN";
-    public static String GOOGLE_REDIRECT_URI = "http://localhost:8084/SE141133_HanaShop/MainController?action=loginGmail";
+    public static String GOOGLE_CLIEND_ID = "791654314966-rne8qtpdplltddgrg45kookue74udtoo.apps.googleusercontent.com";
+    public static String GOOGLE_CLIENT_SECRET = "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";
+    public static String GOOGLE_REDIRECT_URI = "http://localhost:8084/SWD_TechnologyProduct/MainController?action=LoginWithGoogle";
     public static String GOOGLE_LINK_GET_TOKEN = "https://accounts.google.com/o/oauth2/token";
     public static String GOOGLE_LINK_GET_USER_INFO = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=";
     public static String GOOGLE_GRANT_TYPE = "authorization_code";

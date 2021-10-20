@@ -56,6 +56,18 @@
         <servlet-name>SearchByCategoryController</servlet-name>
         <servlet-class>swd.controller.SearchByCategoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderController</servlet-name>
+        <servlet-class>swd.controller.OrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelPaymentController</servlet-name>
+        <servlet-class>swd.controller.CancelPaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaypalController</servlet-name>
+        <servlet-class>swd.controller.PaypalController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -111,6 +123,18 @@
     <servlet-mapping>
         <servlet-name>SearchByCategoryController</servlet-name>
         <url-pattern>/SearchByCategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
+        <url-pattern>/OrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelPaymentController</servlet-name>
+        <url-pattern>/CancelPaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaypalController</servlet-name>
+        <url-pattern>/PaypalController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

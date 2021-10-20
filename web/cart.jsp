@@ -117,7 +117,7 @@
                                 </form>
                                 <div class="right">
                                     <p>Payment Method </p><select id="selectedForm" onchange="selectedPayment()">
-                                        <option value="Cash">Cash</option>
+                                        <option value="Cash">Cash on Delivery</option>
                                         <option value="PayPal">PayPal</option>
                                     </select><br>
                                     <form action="MainController" method="POST" id="formInput">

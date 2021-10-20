@@ -395,4 +395,49 @@ public class ProductDAO {
         }
         return check;
     }
+    
+    public List<ProductDTO> getProductByCID(String cid) {
+        List<ProductDTO> result = null;
+        ProductDTO dto = null;
+        String id, name, img;
+        float price;
+        String query = "select productID, name, price, img from PRODUCT\n"
+                + "where category = ?";
+        try {
+           conn = DBConnection.getMyConnection();
+            preStm = conn.prepareStatement(query);
+            preStm.setString(1, cid);
+            rs = preStm.executeQuery();
+            result = new ArrayList<>();
+            while (rs.next()) {
+                id = rs.getString("productID");
+                name = rs.getString("name");
+                img = rs.getString("img");
+                price = rs.getFloat("price");
+                dto = new ProductDTO(id, name, img, price);
+                result.add(dto);
+            }
+        } catch (Exception e) {
+        }
+        return result;
+    }
+    
+    public int getQuantityByProductID(String productID) throws Exception {
+        int result = 0;
+        try {
+            conn = DBConnection.getMyConnection();
+            String sql = "Select quantity\n"
+                    + "From PRODUCT\n"
+                    + "Where productID=? and status='Active'";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, productID);
+            rs = preStm.executeQuery();
+            if (rs.next()) {
+                result = rs.getInt("quantity");
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
 }

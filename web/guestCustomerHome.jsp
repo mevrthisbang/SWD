@@ -14,12 +14,21 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
+        <section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">In a World of Technology, People Make the Difference.</h1>
+        <p class="lead text-muted mb-0">We’re in IT Business since 1999</p>
+    </div>
+</section>
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="Home.jsp">Home</a></li>
+                            <c:url var = "homeLink" value="MainController">
+                                <c:param name="action" value="Search"/>
+                            </c:url>
+                                <li class="breadcrumb-item"><a href="${homeLink}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="#">Category</a></li>
                             </ol>
                         </nav>
@@ -42,7 +51,7 @@
                                         <h4 class="card-title show_txt"><a href="#" title="View Product">${o.name}</a></h4>
                                         <p class="card-text show_txt">${o.name}</p>
                                         <div class="row">
-                                            <div class="col">
+                                            <div class="col" style="text-align: center;">
                                                 <p>${o.price}$</p>
                                             </div>
                                             <div class="col">

@@ -36,8 +36,8 @@
 
                 </div>
                 <input class="btn" value="Login" name="action" type="submit" />
-                <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/SE141133_HanaShop/MainController?action=loginGmail&response_type=code
-                   &client_id=939804373285-dosi8pg5biocp08k7id7d35o1iarj0fm.apps.googleusercontent.com&approval_prompt=force">Login by Gmail</a><br>
+                <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/SWD_TechnologyProduct/MainController?action=LoginWithGoogle&response_type=code
+                   &client_id=791654314966-rne8qtpdplltddgrg45kookue74udtoo.apps.googleusercontent.com&approval_prompt=force">Login by Gmail</a><br>
                 Home Page?<a href="MainController"> Back to Home Page</a>
             </form>
         </div>

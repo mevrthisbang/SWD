@@ -18,21 +18,23 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import java.util.ArrayList;
 import java.util.List;
+import swd.dto.ProductDTO;
+import swd.object.CartObj;
 
 /**
  *
  * @author mevrthisbang
  */
 public class PaypalPaymentServices {
-    private static final String CLIENT_ID = "Ae00bQM1gXOmKGMPAsYBnaz-O63ZtORdD_BtOmwS2bXfhGCcyQJAI3p1R7OlqeDpMaW210Gv46CHagaw";
-    private static final String CLIENT_SECRET = "EFH4fOYCFPVhsHDiDiPbN2st8Qr9LWDFzLm4eIiDuDQ1hZfT-iGbSircMPmET7-zCoV37flGT26Xz8Xp";
+    private static final String CLIENT_ID = "AT650jD8zI6YbCsZcmGCxS6iao8cmH5a2k8tjWcnKDx0V0PFCVYhq8Au-NUb9JnSddSjV_26ctOXaDxx";
+    private static final String CLIENT_SECRET = "EGdTM9WXQ_ENCDznsyeNwr329rkMbGaQDtiH7d61ao0U7WQjKEcXhTqWgTdKBZgETykgcJoRQwro53Y3";
     private static final String MODE = "sandbox";
 
-    public String authorizePayment(/*CartObj cart*/) throws PayPalRESTException {
+    public String authorizePayment(CartObj cart) throws PayPalRESTException {
         RedirectUrls redirectUrls = getRedirectUrls();
-//        List<Transaction> listTransaction = getTransactionInformation(cart);
+        List<Transaction> listTransaction = getTransactionInformation(cart);
         Payment requestPayment = new Payment();
-//        requestPayment.setTransactions(listTransaction);
+        requestPayment.setTransactions(listTransaction);
         requestPayment.setRedirectUrls(redirectUrls);
         requestPayment.setPayer(getPayerInformation());
         requestPayment.setIntent("sale");
@@ -43,28 +45,28 @@ public class PaypalPaymentServices {
 
     private RedirectUrls getRedirectUrls() {
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setReturnUrl("http://localhost:8084/SE141133_HanaShop/MainController?action=paypal");
-        redirectUrls.setCancelUrl("http://localhost:8084/SE141133_HanaShop/cart.jsp");
+        redirectUrls.setReturnUrl("http://localhost:8084/SWD_TechnologyProduct/MainController?action=paypal");
+        redirectUrls.setCancelUrl("http://localhost:8084/SWD_TechnologyProduct/cart.jsp");
         return redirectUrls;
     }
 
-    private List<Transaction> getTransactionInformation(/*CartObj cart*/) {
+    private List<Transaction> getTransactionInformation(CartObj cart) {
         List<Transaction> listTransaction = null;
         Amount amount = new Amount();
         amount.setCurrency("USD");
-//        amount.setTotal(String.format("%.2f", cart.getTotal()));
+        amount.setTotal(String.format("%.2f", cart.getTotal()));
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
-//        for (FoodDTO food : cart.getCart().values()) {
-//            Item item = new Item();
-//            item.setPrice(food.getPrice() + "");
-//            item.setQuantity(food.getQuantity() + "");
-//            item.setCurrency("USD");
-//            item.setName(food.getName());
-//            items.add(item);
-//        }
+        for (ProductDTO product : cart.getCart().values()) {
+            Item item = new Item();
+            item.setPrice(product.getPrice() + "");
+            item.setQuantity(product.getQuantity() + "");
+            item.setCurrency("USD");
+            item.setName(product.getName());
+            items.add(item);
+        }
         itemList.setItems(items);
         transaction.setItemList(itemList);
         listTransaction = new ArrayList();

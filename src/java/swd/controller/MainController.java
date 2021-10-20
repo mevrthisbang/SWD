@@ -30,6 +30,11 @@ public class MainController extends HttpServlet {
     private static final String LOADMORE = "LoadMoreController";
     private static final String REGISTER = "RegisterAccountController";
     private static final String ADDTOCART = "AddToCartController";
+    private static final String SEARCHBYCATEGORY = "SearchByCategoryController";
+    private static final String REMOVE = "RemoveFromCartController";
+    private static final String ORDER = "OrderController";
+    private static final String UPDATECART = "UpdateCartController";
+    private static final String PAYPAL="PaypalController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,6 +64,16 @@ public class MainController extends HttpServlet {
                 url = REGISTER;
             }else if (action.equals("AddToCart")) {
                 url = ADDTOCART;
+            }else if (action.equals("searchByCategory")) {
+                url = SEARCHBYCATEGORY;
+            }else if (action.equals("Remove")) {
+                url = REMOVE;
+            } else if (action.equals("Confirm Order")) {
+                url = ORDER;
+            } else if (action.equals("Update Cart")) {
+                url = UPDATECART;
+            }else if(action.equals("paypal")){
+                url=PAYPAL;
             }else{
                 request.setAttribute("ERROR", "Your action is invalid");
             }
