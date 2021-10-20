@@ -33,7 +33,7 @@ public class MainController extends HttpServlet {
     private static final String SEARCHBYCATEGORY = "SearchByCategoryController";
     private static final String REMOVE = "RemoveFromCartController";
     private static final String ORDER = "OrderController";
-    private static final String UPDATECART = "UpdateCartController";
+    private static final String UPDATECART = "UpdateQuantityInCartController";
     private static final String PAYPAL="PaypalController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

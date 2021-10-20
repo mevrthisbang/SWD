@@ -31,7 +31,7 @@ public class UpdateQuantityInCartController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
-            if (loginUser != null && loginUser.getRole().equals("user")) {
+            if (loginUser != null && loginUser.getRole().equals("customer")) {
                 String[] idList = request.getParameterValues("txtID");
                 String[] quantityList = request.getParameterValues("txtQuantity");
                 CartObj cart = (CartObj) session.getAttribute("CART");

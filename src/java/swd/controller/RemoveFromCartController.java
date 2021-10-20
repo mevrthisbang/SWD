@@ -31,7 +31,7 @@ public class RemoveFromCartController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
-            if (loginUser != null && loginUser.getRole().equals("user")) {
+            if (loginUser != null && loginUser.getRole().equals("customer")) {
                 String[] productIDs = request.getParameterValues("chkRemove");
 
                 CartObj cart = (CartObj) session.getAttribute("CART");
