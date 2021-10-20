@@ -1,1 +1,6 @@
 /build/
+/dist/
+/build/
+*.jar
+*.war
+/.idea/
