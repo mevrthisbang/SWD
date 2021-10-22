@@ -30,6 +30,17 @@ public class OrderDTO implements Serializable {
         this.shippingAddress = address;
     }
 
+    public OrderDTO(String orderID, String customer, String buyerName, Date buyDate, String phone, String shippingAddress, float total, String status) {
+        this.orderID = orderID;
+        this.customer = customer;
+        this.buyerName = buyerName;
+        this.phone = phone;
+        this.shippingAddress = shippingAddress;
+        this.status = status;
+        this.buyDate = buyDate;
+        this.total = total;
+    }
+
     public String getOrderID() {
         return orderID;
     }
@@ -62,12 +73,12 @@ public class OrderDTO implements Serializable {
         this.phone = phone;
     }
 
-    public String getAddress() {
+    public String getShippingAddress() {
         return shippingAddress;
     }
 
-    public void setAddress(String address) {
-        this.shippingAddress = address;
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
     public String getStatus() {
