@@ -36,6 +36,7 @@ public class MainController extends HttpServlet {
     private static final String UPDATECART = "UpdateQuantityInCartController";
     private static final String PAYPAL = "PaypalController";
     private static final String SHOPPINGHISTORY = "ShoppingHistoryController";
+    private static final String SHOWDETAILHISTORY = "ShowDetailHistoryController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -77,6 +78,8 @@ public class MainController extends HttpServlet {
                 url = PAYPAL;
             } else if (action.equals("shoppingHistory")) {
                 url = SHOPPINGHISTORY;
+            } else if (action.equals("showDetailHistory")) {
+                url = SHOWDETAILHISTORY;
             } else {
                 request.setAttribute("ERROR", "Your action is invalid");
             }

@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Temp/SWD/web/historyOrder.jsp</file>
+            <file>file:/C:/Temp/SWD/web/historyDetail.jsp</file>
+            <file>file:/C:/Temp/SWD/src/java/swd/controller/ShowDetailHistoryController.java</file>
+            <file>file:/C:/Temp/SWD/src/java/swd/controller/ShoppingHistoryController.java</file>
+            <file>file:/C:/Temp/SWD/src/java/swd/controller/MainController.java</file>
+        </group>
     </open-files>
 </project-private>

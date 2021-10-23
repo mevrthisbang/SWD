@@ -12,7 +12,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Cart</title>
+            <title>Order History</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
             <link href="css/style_1.css" rel="stylesheet"/>
         </head>
@@ -85,13 +85,13 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">No.</th>
-                                        <th scope="col">Order Detail</th>
                                         <th scope="col">Buy Date</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">Address</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Cancel Order</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,27 +99,6 @@
                                         <tr>
                                             <td>
                                                 ${counter.count}
-                                            </td>
-                                            <td>
-                                                <table border="1">
-                                                    <tbody>
-                                                        <c:forEach var="orderDetail" items="${product.value}" varStatus="counter">
-                                                            <c:if test="${product.key.orderID eq orderDetail.orderID}">
-                                                                <tr>
-                                                                    <td>
-                                                                        Product ID: <br/>${orderDetail.productID} 
-                                                                    </td>
-                                                                    <td>
-                                                                        Price: <br/>${orderDetail.price} 
-                                                                    </td>
-                                                                    <td>
-                                                                        Quantity: ${orderDetail.quantity}
-                                                                    </td>
-                                                                </tr>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
                                             </td>
                                             <td>
                                                 <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${product.key.buyDate}" />
@@ -139,12 +118,18 @@
                                             <td>
                                                 <c:if test="${product.key.status eq 'Canceled' or product.key.status eq 'Completed'}">
                                                     <font color="red">
-                                                    Cancel
+                                                    Can't cancel order
                                                     </font>
                                                 </c:if>
                                                 <c:if test="${product.key.status eq 'Delivering' or product.key.status eq 'Wait for Confirmation' or product.key.status eq 'Confirmed'}">
                                                     <a>Cancel the order</a>
                                                 </c:if>
+                                            </td>
+                                            <td>
+                                                <c:url var="showDetailHistory" value="MainController">
+                                                    <c:param name="action" value="showDetailHistory"/>
+                                                </c:url>
+                                                <a href="${showDetailHistory}">Show detail</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
