@@ -18,6 +18,7 @@ import swd.dto.ProductDTO;
  * @author mevrthisbang
  */
 public class ProductDAO {
+
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
@@ -33,10 +34,11 @@ public class ProductDAO {
             conn.close();
         }
     }
-    public List<ProductDTO> getTop6() throws Exception{
+
+    public List<ProductDTO> getTop6() throws Exception {
         List<ProductDTO> result = null;
         String query = "select top 6 productID, name, price, img from PRODUCT\n"
-                +"WHERE status='Active'\n"
+                + "WHERE status='Active'\n"
                 + "ORDER BY createDate\n";
         ProductDTO dto = null;
         String id, name, img;
@@ -59,7 +61,33 @@ public class ProductDAO {
         }
         return result;
     }
-    public List<ProductDTO> getNext3Product(int amount) throws Exception{
+    
+    public List<ProductDTO> getAllProduct() throws Exception {
+        List<ProductDTO> result = null;
+        String query = "select productID, name, price, img from PRODUCT";
+        ProductDTO dto = null;
+        String id, name, img;
+        float price;
+        try {
+            conn = DBConnection.getMyConnection();//mo ket noi voi sql
+            preStm = conn.prepareStatement(query);
+            rs = preStm.executeQuery();
+            result = new ArrayList<>();
+            while (rs.next()) {
+                id = rs.getString("productID");
+                name = rs.getString("name");
+                img = rs.getString("img");
+                price = rs.getFloat("price");
+                dto = new ProductDTO(id, name, img, price);
+                result.add(dto);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
+
+    public List<ProductDTO> getNext3Product(int amount) throws Exception {
         List<ProductDTO> result = null;
         ProductDTO dto = null;
         String id, name, img;
@@ -85,11 +113,12 @@ public class ProductDAO {
                 dto = new ProductDTO(id, name, img, price);
                 result.add(dto);
             }
-        } finally{
+        } finally {
             closeConnection();
         }
         return result;
     }
+
     public int getNumbersOfProductBySearchForAdmin(String search, float from, float to, String cateID) throws Exception {
         int result = 0;
         try {
@@ -286,7 +315,7 @@ public class ProductDAO {
         }
         return result;
     }
-    
+
     public String getLastProductID(String category) throws Exception {
         String result = null;
         try {
@@ -306,6 +335,7 @@ public class ProductDAO {
         }
         return result;
     }
+
     public boolean create(ProductDTO product, String createBy) throws Exception {
         boolean check = false;
         try {
@@ -327,6 +357,7 @@ public class ProductDAO {
         }
         return check;
     }
+
     public boolean update(ProductDTO product, String updateBy) throws Exception {
         boolean check = false;
         try {
@@ -349,7 +380,7 @@ public class ProductDAO {
         }
         return check;
     }
-    
+
     public ProductDTO getProductByPrimaryKey(String productID) throws Exception {
         ProductDTO result = null;
         try {
@@ -379,6 +410,7 @@ public class ProductDAO {
         }
         return result;
     }
+
     public boolean delete(String id, String updateBy) throws Exception {
         boolean check = false;
         try {
@@ -395,7 +427,7 @@ public class ProductDAO {
         }
         return check;
     }
-    
+
     public List<ProductDTO> getProductByCID(String cid) {
         List<ProductDTO> result = null;
         ProductDTO dto = null;
@@ -404,7 +436,7 @@ public class ProductDAO {
         String query = "select productID, name, price, img from PRODUCT\n"
                 + "where category = ?";
         try {
-           conn = DBConnection.getMyConnection();
+            conn = DBConnection.getMyConnection();
             preStm = conn.prepareStatement(query);
             preStm.setString(1, cid);
             rs = preStm.executeQuery();
@@ -421,7 +453,7 @@ public class ProductDAO {
         }
         return result;
     }
-    
+
     public int getQuantityByProductID(String productID) throws Exception {
         int result = 0;
         try {
