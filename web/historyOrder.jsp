@@ -128,6 +128,7 @@
                                             <td>
                                                 <c:url var="showDetailHistory" value="MainController">
                                                     <c:param name="action" value="showDetailHistory"/>
+                                                    <c:param name="orderID" value="${product.key.orderID}"/>
                                                 </c:url>
                                                 <a href="${showDetailHistory}">Show detail</a>
                                             </td>

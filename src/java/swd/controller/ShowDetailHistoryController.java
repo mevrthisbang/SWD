@@ -47,12 +47,12 @@ public class ShowDetailHistoryController extends HttpServlet {
         try {
             OrderDetailDAO detailDAO = new OrderDetailDAO();
             HttpSession session = request.getSession();
-            Map<OrderDTO, List<OrderDetailDTO>> order = (Map)session.getAttribute("USER");
+//            Map<OrderDTO, List<OrderDetailDTO>> order = (Map)session.getAttribute("USER");
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
             if (loginUser != null) {
                 if (loginUser.getRole().equals("customer")) {
                     url = HISTORY_DETAIL;
-                    String orderID = "";
+                    String orderID = request.getParameter("orderID");
                     if (orderID != null) {
                         detailDAO.getItem(orderID);
                         List<OrderDetailDTO> listOrderDetail = new ArrayList<>();

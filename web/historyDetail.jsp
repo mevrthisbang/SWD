@@ -74,27 +74,35 @@
                             </thead>
                             <tbody>
                                 <c:forEach items="${sessionScope.HISTORYDETAIL}" var="product" varStatus="counter">
-                                        <tr>
-                                            <td>
-                                                ${counter.count}
-                                            </td>
-                                            <td>
-                                                ${product.productID}
-                                            </td>
-                                            <td>
-                                                ${product.productID}
-                                            </td>
-                                            <td>
-                                                ${product.price}
-                                            </td>
-                                            <td>
-                                                ${product.quantity}
-                                            </td>
-                                            <td>
-                                                Ahihi
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                    <tr>
+                                        <td>
+                                            ${counter.count}
+                                        </td>
+                                        <td>
+                                            <c:forEach var="productList" items="${requestScope.listProductToShow}">
+                                                <c:if test="${product.productID eq productList.productID}">
+                                                    <img src="${productList.img}"/>
+                                                </c:if>
+                                            </c:forEach>
+                                        </td>
+                                        <td>
+                                            <c:forEach var="productList" items="${requestScope.listProductToShow}">
+                                                <c:if test="${product.productID eq productList.productID}">
+                                                    ${productList.name}
+                                                </c:if>
+                                            </c:forEach>
+                                        </td>
+                                        <td>
+                                            ${product.price}
+                                        </td>
+                                        <td>
+                                            ${product.quantity}
+                                        </td>
+                                        <td>
+                                            Review
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
