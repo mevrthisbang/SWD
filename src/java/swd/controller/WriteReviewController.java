@@ -6,26 +6,20 @@
 package swd.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import swd.dao.OrderDAO;
-import swd.dao.OrderDetailDAO;
+import swd.dao.ReviewDAO;
 import swd.dto.AccountDTO;
-import swd.dto.OrderDTO;
-import swd.dto.OrderDetailDTO;
+import swd.dto.ReviewDTO;
 
 /**
  *
  * @author Admin
  */
-public class ShoppingHistoryController extends HttpServlet {
+public class WriteReviewController extends HttpServlet {
 
     private static final String ORDER_HISTORY = "historyOrder.jsp";
     private static final String ERROR = "error.jsp";
@@ -43,27 +37,41 @@ public class ShoppingHistoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String idCus = null;
+        String idCus;
         try {
-            OrderDAO orderDAO = new OrderDAO();
-            OrderDetailDAO detailDAO = new OrderDetailDAO();
-            String statusInput = request.getParameter("cbStatus");
+            String orderID = request.getParameter("orderID");
+            String productID = request.getParameter("productID");
+            String reviewContent = request.getParameter("txtComment");
+            String reviewRate = request.getParameter("rate");
+            ReviewDAO daoReview = new ReviewDAO();
             HttpSession session = request.getSession();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
+            String status = "Submitted";
             if (loginUser != null) {
                 if (loginUser.getRole().equals("customer")) {
-                    url = ORDER_HISTORY;
                     idCus = loginUser.getId();
-                    orderDAO.getListOrderOfUserByStatus(idCus, statusInput);
-                    List<OrderDTO> listOrderOfCustomer = orderDAO.ListOrderOfUser();
-                    session.setAttribute("ORDERHISTORY", listOrderOfCustomer);
-                } else {
-                    url = ERROR;
-                    request.setAttribute("ERROR", "You do not have permission to do this");
+                    String reviewID;
+                    String lastID = daoReview.getLastReviewID();
+                    if (lastID == null) {
+                        reviewID = "R-1";
+                    } else {
+                        String currentNum = lastID.substring(1);
+                        int num = Integer.parseInt(currentNum);
+                        num = num + 1;
+                        reviewID = "R-" + num;
+                    }
+                    ReviewDTO dtoReview = new ReviewDTO(reviewID, idCus, productID, orderID, reviewContent, status, Float.parseFloat(reviewRate));
+                    boolean result = daoReview.createReview(dtoReview);
+                    if (result) {
+                        url = ORDER_HISTORY;
+                    }
                 }
+            } else {
+                url = ERROR;
+                request.setAttribute("ERROR", "You do not have permission to do this");
             }
         } catch (Exception e) {
-            log("ERROR at ShoppingHistoryController: " + e.getMessage());
+            log("ERROR at WriteReviewController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

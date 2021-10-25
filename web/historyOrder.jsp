@@ -62,20 +62,40 @@
                         <div>
                             <div>
                                 <ul id="navbar-history" class="nav nav-tabs">
-                                    <li class="active"><a href="#">All</a></li>
-                                    <li><a href="#">Wait for Confirmation</a></li>
-                                    <li><a href="#">Confirmed</a></li>
-                                    <li><a href="#">Delivering</a></li>
-                                    <li><a href="#">Completed</a></li>
-                                    <li><a href="#">Canceled</a></li>
+                                    <c:url var="historyLink" value="MainController">
+                                        <c:param name="action" value="shoppingHistory"/>
+                                    </c:url>
+                                    <li class="active"><a href="${historyLink}">All</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Wait for Confirmation" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Wait for Confirmation</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Confirmed" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Confirmed</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Delivering" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Delivering</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Completed" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Completed</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Canceled" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Canceled</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--                <div id="searchBarNav">
-                                    <input type="text" placeholder="Search..">
-                                </div>-->
             </div>
             <div class="row" style="margin-top: 50px;">
                 <c:if test="${sessionScope.ORDERHISTORY!=null}" var="testEmpty">
@@ -91,7 +111,7 @@
                                         <th scope="col">Total</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Cancel Order</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,33 +121,34 @@
                                                 ${counter.count}
                                             </td>
                                             <td>
-                                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${product.key.buyDate}" />
+                                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${product.buyDate}" />
                                             </td>
                                             <td>
-                                                ${product.key.phone}
+                                                ${product.phone}
                                             </td>
                                             <td>
-                                                ${product.key.shippingAddress}
+                                                ${product.shippingAddress}
                                             </td>
                                             <td>
-                                                ${product.key.total}
+                                                ${product.total}
                                             </td>
                                             <td>
-                                                ${product.key.status}
+                                                ${product.status}
                                             </td>
                                             <td>
-                                                <c:if test="${product.key.status eq 'Canceled' or product.key.status eq 'Completed'}">
+                                                <c:if test="${product.status eq 'Canceled' or product.status eq 'Completed'}">
                                                     <font color="red">
                                                     Can't cancel order
                                                     </font>
                                                 </c:if>
-                                                <c:if test="${product.key.status eq 'Delivering' or product.key.status eq 'Wait for Confirmation' or product.key.status eq 'Confirmed'}">
+                                                <c:if test="${product.status eq 'Delivering' or product.status eq 'Wait for Confirmation' or product.status eq 'Confirmed'}">
                                                     <a>Cancel the order</a>
                                                 </c:if>
                                             </td>
                                             <td>
                                                 <c:url var="showDetailHistory" value="MainController">
                                                     <c:param name="action" value="showDetailHistory"/>
+                                                    <c:param name="orderID" value="${product.orderID}"/>
                                                 </c:url>
                                                 <a href="${showDetailHistory}">Show detail</a>
                                             </td>
