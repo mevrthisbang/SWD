@@ -3,60 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/MainController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/menu.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/CategoryDAO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/OrderDetailDAO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/PaymentDTO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/paypal/PaypalPaymentServices.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/object/CartObj.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/OrderDTO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/google/GooglePojo.java</file>
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/ProductDTO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/PaymentDetailDTO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/detail.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/GetProductByPrmaryKeyController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/register.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/object/AccountErrorObject.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/AccountDAO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/SearchController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/cart.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/OrderDetailDTO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/createForm.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/CanceledOrder.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/ProductDAO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/object/ProductErrorObject.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/HomeController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/LogoutController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/css/style.css</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/NotificationDAO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/CategoryDTO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/RegisterAccountController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/loginForm.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/LoginWithGoogleController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/LoadMoreController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/PaymentDAO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/left.jsp</file>
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/updateForm.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/NotificationDTO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/SearchByCategoryController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dto/AccountDTO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/CreateProductController.java</file>
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/adminHome.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/UpdateQuantityInCartController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/DisableController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/RemoveFromCartController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/AddToCartController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/footer.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/OrderDAO.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/google/GoogleUtils.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/guestCustomerHome.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/error.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/object/OrderErrorObject.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/LoginController.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/db/DBConnection.java</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/UpdateController.java</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/createForm.jsp</file>
         </group>
     </open-files>
 </project-private>

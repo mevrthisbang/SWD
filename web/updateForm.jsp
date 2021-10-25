@@ -35,6 +35,8 @@
                                         <li> <a class="active" href="MainController">Home</a>
                                         </li>
                                         <li><a href="createForm.jsp">Create new Product</a></li>
+                                        <li><a href="createForm.jsp">Customer Order</a></li>
+                                        <li><a href="createForm.jsp">Profile</a></li>
                                             <c:url var="logoutLink" value="MainController">
                                                 <c:param name="action" value="Logout"/>
                                             </c:url>

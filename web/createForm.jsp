@@ -34,7 +34,9 @@
                                     <ul class="first-ul">
                                         <li> <a class="active" href="MainController">Home</a>
                                         </li>
-                                        <li><a href="createForm.jsp">Create new Food</a></li>
+                                        <li><a href="createForm.jsp">Create new Product</a></li>
+                                        <li><a href="createForm.jsp">Customer Order</a></li>
+                                        <li><a href="createForm.jsp">Profile</a></li>
                                             <c:url var="logoutLink" value="MainController">
                                                 <c:param name="action" value="Logout"/>
                                             </c:url>
@@ -48,7 +50,7 @@
             </div>
             <div class="container" style="margin-top: 50px;">
                 <div class="center">
-                    <h1>Create Food Form</h1>
+                    <h1>Create Product Form</h1>
                 </div>
                 <form action="MainController?action=Create" method="POST" enctype="multipart/form-data">
                     <div class="row">
