@@ -96,9 +96,6 @@
                         </div>
                     </div>
                 </div>
-                <!--                <div id="searchBarNav">
-                                    <input type="text" placeholder="Search..">
-                                </div>-->
             </div>
             <div class="row" style="margin-top: 50px;">
                 <c:if test="${sessionScope.ORDERHISTORY!=null}" var="testEmpty">
@@ -124,34 +121,34 @@
                                                 ${counter.count}
                                             </td>
                                             <td>
-                                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${product.key.buyDate}" />
+                                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${product.buyDate}" />
                                             </td>
                                             <td>
-                                                ${product.key.phone}
+                                                ${product.phone}
                                             </td>
                                             <td>
-                                                ${product.key.shippingAddress}
+                                                ${product.shippingAddress}
                                             </td>
                                             <td>
-                                                ${product.key.total}
+                                                ${product.total}
                                             </td>
                                             <td>
-                                                ${product.key.status}
+                                                ${product.status}
                                             </td>
                                             <td>
-                                                <c:if test="${product.key.status eq 'Canceled' or product.key.status eq 'Completed'}">
+                                                <c:if test="${product.status eq 'Canceled' or product.status eq 'Completed'}">
                                                     <font color="red">
                                                     Can't cancel order
                                                     </font>
                                                 </c:if>
-                                                <c:if test="${product.key.status eq 'Delivering' or product.key.status eq 'Wait for Confirmation' or product.key.status eq 'Confirmed'}">
+                                                <c:if test="${product.status eq 'Delivering' or product.status eq 'Wait for Confirmation' or product.status eq 'Confirmed'}">
                                                     <a>Cancel the order</a>
                                                 </c:if>
                                             </td>
                                             <td>
                                                 <c:url var="showDetailHistory" value="MainController">
                                                     <c:param name="action" value="showDetailHistory"/>
-                                                    <c:param name="orderID" value="${product.key.orderID}"/>
+                                                    <c:param name="orderID" value="${product.orderID}"/>
                                                 </c:url>
                                                 <a href="${showDetailHistory}">Show detail</a>
                                             </td>

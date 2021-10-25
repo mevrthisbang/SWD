@@ -56,18 +56,7 @@ public class ShoppingHistoryController extends HttpServlet {
                     idCus = loginUser.getId();
                     orderDAO.getListOrderOfUserByStatus(idCus, statusInput);
                     List<OrderDTO> listOrderOfCustomer = orderDAO.ListOrderOfUser();
-                    if (!listOrderOfCustomer.isEmpty()) {
-                        Map<OrderDTO, List<OrderDetailDTO>> order = new HashMap<>();
-                        for (OrderDTO orderDTO : listOrderOfCustomer) {
-                            detailDAO.getItem(orderDTO.getOrderID());
-                            List<OrderDetailDTO> listOrderDetail = new ArrayList<>();
-                            listOrderDetail = detailDAO.ListItemInOrder();
-                            if (!listOrderDetail.isEmpty()) {
-                                order.put(orderDTO, listOrderDetail);
-                            }
-                        }
-                        session.setAttribute("ORDERHISTORY", order);
-                    }
+                    session.setAttribute("ORDERHISTORY", listOrderOfCustomer);
                 } else {
                     url = ERROR;
                     request.setAttribute("ERROR", "You do not have permission to do this");
