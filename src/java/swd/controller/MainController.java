@@ -6,7 +6,6 @@
 package swd.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +36,8 @@ public class MainController extends HttpServlet {
     private static final String PAYPAL = "PaypalController";
     private static final String SHOPPINGHISTORY = "ShoppingHistoryController";
     private static final String SHOWDETAILHISTORY = "ShowDetailHistoryController";
+    private static final String REVIEWPRODUCT= "ReviewProductController";
+    private static final String WRITEREVIEW= "WriteReviewController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -80,6 +81,12 @@ public class MainController extends HttpServlet {
                 url = SHOPPINGHISTORY;
             } else if (action.equals("showDetailHistory")) {
                 url = SHOWDETAILHISTORY;
+            } else if (action.equals("reviewProduct")) {
+                url = REVIEWPRODUCT;
+            } else if (action.equals("Review")) {
+                url = WRITEREVIEW;
+            } else if (action.equals("Cancel Review")) {
+                url = SHOPPINGHISTORY;
             } else {
                 request.setAttribute("ERROR", "Your action is invalid");
             }

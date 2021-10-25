@@ -47,7 +47,7 @@ public class OrderDetailDAO {
         try {
             conn = DBConnection.getMyConnection();
             if (conn != null) {
-                String sql = "SELECT orderDetailID, orderID, productID, review_rate, review_comment, quantity, price"
+                String sql = "SELECT orderDetailID, orderID, productID, quantity, price"
                         + " FROM ORDER_DETAIL Where orderID = ?";
                 preStmOrderDetail = conn.prepareStatement(sql);
                 preStmOrderDetail.setString(1, orderIDGet);
@@ -56,11 +56,9 @@ public class OrderDetailDAO {
                     String orderDetailID = rs.getString("orderDetailID");
                     String orderID = rs.getString("orderID");
                     String productID = rs.getString("productID");
-                    float reviewRate = rs.getFloat("review_rate");
-                    String review_comment = rs.getString("review_comment");
                     int quantity = rs.getInt("quantity");
                     float price = rs.getFloat("price");
-                    OrderDetailDTO dto = new OrderDetailDTO(orderDetailID, orderID, productID, reviewRate, review_comment, quantity, price);
+                    OrderDetailDTO dto = new OrderDetailDTO(orderDetailID, orderID, productID, quantity, price);
                     if (this.listItem == null) {
                         this.listItem = new ArrayList<>();
                     }
@@ -70,5 +68,29 @@ public class OrderDetailDAO {
         } finally {
             closeConnection();
         }
+    }
+
+    public OrderDetailDTO getOrderDetail(String orderDetailID) throws Exception {
+        OrderDetailDTO dto = null;
+        try {
+            conn = DBConnection.getMyConnection();
+            if (conn != null) {
+                String sql = "SELECT orderDetailID, orderID, productID, quantity, price"
+                        + " FROM ORDER_DETAIL Where orderDetailID = ?";
+                preStmOrderDetail = conn.prepareStatement(sql);
+                preStmOrderDetail.setString(1, orderDetailID);
+                rs = preStmOrderDetail.executeQuery();
+                while (rs.next()) {
+                    String orderID = rs.getString("orderID");
+                    String productID = rs.getString("productID");
+                    int quantity = rs.getInt("quantity");
+                    float price = rs.getFloat("price");
+                    dto = new OrderDetailDTO(orderDetailID, orderID, productID, quantity, price);
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return dto;
     }
 }
