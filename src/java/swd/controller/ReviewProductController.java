@@ -6,9 +6,7 @@
 package swd.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,17 +15,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import swd.dao.OrderDAO;
 import swd.dao.OrderDetailDAO;
+import swd.dao.PaymentDetailDAO;
+import swd.dao.ProductDAO;
 import swd.dto.AccountDTO;
-import swd.dto.OrderDTO;
 import swd.dto.OrderDetailDTO;
+import swd.dto.ProductDTO;
 
 /**
  *
  * @author Admin
  */
-public class ShoppingHistoryController extends HttpServlet {
+public class ReviewProductController extends HttpServlet {
 
-    private static final String ORDER_HISTORY = "historyOrder.jsp";
+    private static final String REVIEW = "review.jsp";
     private static final String ERROR = "error.jsp";
 
     /**
@@ -43,38 +43,35 @@ public class ShoppingHistoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String idCus = null;
         try {
+            PaymentDetailDAO paymentDAO = new PaymentDetailDAO();
             OrderDAO orderDAO = new OrderDAO();
             OrderDetailDAO detailDAO = new OrderDetailDAO();
-            String statusInput = request.getParameter("cbStatus");
+            ProductDAO productDAO = new ProductDAO();
             HttpSession session = request.getSession();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
             if (loginUser != null) {
                 if (loginUser.getRole().equals("customer")) {
-                    url = ORDER_HISTORY;
-                    idCus = loginUser.getId();
-                    orderDAO.getListOrderOfUserByStatus(idCus, statusInput);
-                    List<OrderDTO> listOrderOfCustomer = orderDAO.ListOrderOfUser();
-                    if (!listOrderOfCustomer.isEmpty()) {
-                        Map<OrderDTO, List<OrderDetailDTO>> order = new HashMap<>();
-                        for (OrderDTO orderDTO : listOrderOfCustomer) {
-                            detailDAO.getItem(orderDTO.getOrderID());
-                            List<OrderDetailDTO> listOrderDetail = new ArrayList<>();
-                            listOrderDetail = detailDAO.ListItemInOrder();
-                            if (!listOrderDetail.isEmpty()) {
-                                order.put(orderDTO, listOrderDetail);
-                            }
-                        }
-                        session.setAttribute("ORDERHISTORY", order);
-                    }
-                } else {
-                    url = ERROR;
-                    request.setAttribute("ERROR", "You do not have permission to do this");
+                    url = REVIEW;
+                    String orderDetailID = request.getParameter("orderDetailID");
+                    OrderDetailDTO dtoOrderDetail = detailDAO.getOrderDetail(orderDetailID);
+                    ProductDTO dtoProduct = productDAO.getProductByPrimaryKey(dtoOrderDetail.getProductID());
+                    String price = dtoProduct.getPrice() + "";
+                    Map<String,String> mapInfo = new HashMap<>();
+                    mapInfo.put("Image", dtoProduct.getImg());
+                    mapInfo.put("Name", dtoProduct.getName());
+                    mapInfo.put("Price", price);
+                    mapInfo.put("Desscription", dtoProduct.getDescription());
+                    session.setAttribute("PRODUCTREVIEW", mapInfo);
+                    session.setAttribute("ORDERIDREVIEW", dtoOrderDetail.getOrderID());
+                    session.setAttribute("PRODUCTIDREVIEW", dtoProduct.getProductID());
                 }
+            } else {
+                url = ERROR;
+                request.setAttribute("ERROR", "You do not have permission to do this");
             }
         } catch (Exception e) {
-            log("ERROR at ShoppingHistoryController: " + e.getMessage());
+            log("ERROR at ReviewProductController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -62,12 +62,35 @@
                         <div>
                             <div>
                                 <ul id="navbar-history" class="nav nav-tabs">
-                                    <li class="active"><a href="#">All</a></li>
-                                    <li><a href="#">Wait for Confirmation</a></li>
-                                    <li><a href="#">Confirmed</a></li>
-                                    <li><a href="#">Delivering</a></li>
-                                    <li><a href="#">Completed</a></li>
-                                    <li><a href="#">Canceled</a></li>
+                                    <c:url var="historyLink" value="MainController">
+                                        <c:param name="action" value="shoppingHistory"/>
+                                    </c:url>
+                                    <li class="active"><a href="${historyLink}">All</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Wait for Confirmation" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Wait for Confirmation</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Confirmed" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Confirmed</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Delivering" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Delivering</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Completed" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Completed</a></li>
+                                        <c:url var="historyLink" value="MainController">
+                                            <c:param name="action" value="shoppingHistory"/>
+                                            <c:param value="Canceled" name="cbStatus"/>
+                                        </c:url>
+                                    <li><a href="${historyLink}">Canceled</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -91,7 +114,7 @@
                                         <th scope="col">Total</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Cancel Order</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

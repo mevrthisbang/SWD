@@ -6,20 +6,21 @@
 package swd.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import swd.dao.OrderDAO;
 import swd.dao.OrderDetailDAO;
+import swd.dao.PaymentDetailDAO;
 import swd.dao.ProductDAO;
 import swd.dto.AccountDTO;
 import swd.dto.OrderDTO;
 import swd.dto.OrderDetailDTO;
+import swd.dto.PaymentDetailDTO;
 import swd.dto.ProductDTO;
 
 /**
@@ -45,9 +46,10 @@ public class ShowDetailHistoryController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            PaymentDetailDAO paymentDAO = new PaymentDetailDAO();
             OrderDetailDAO detailDAO = new OrderDetailDAO();
+            OrderDAO orderDAO = new OrderDAO();
             HttpSession session = request.getSession();
-//            Map<OrderDTO, List<OrderDetailDTO>> order = (Map)session.getAttribute("USER");
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
             if (loginUser != null) {
                 if (loginUser.getRole().equals("customer")) {
@@ -57,16 +59,23 @@ public class ShowDetailHistoryController extends HttpServlet {
                         detailDAO.getItem(orderID);
                         List<OrderDetailDTO> listOrderDetail = new ArrayList<>();
                         listOrderDetail = detailDAO.ListItemInOrder();
-                        if(listOrderDetail.size() > 0) {
+                        if (listOrderDetail.size() > 0) {
                             ProductDAO dao = new ProductDAO();
                             List<ProductDTO> list = dao.getAllProduct();
-                            if(list.size() > 0) {
+                            PaymentDetailDTO dtoPaymentDetail = paymentDAO.getPaymentDetailByOrder(orderID);
+                            OrderDTO dtoOrder = orderDAO.getOrderByID(orderID);
+                            if (list.size() > 0) {
                                 request.setAttribute("listProductToShow", list);
                                 session.setAttribute("HISTORYDETAIL", listOrderDetail);
+                                session.setAttribute("PAYMENTDETAIL", dtoPaymentDetail);
+                                session.setAttribute("HISTORYINFO", dtoOrder);
                             }
                         }
                     }
                 }
+            } else {
+                url = ERROR;
+                request.setAttribute("ERROR", "You do not have permission to do this");
             }
         } catch (Exception e) {
             log("ERROR at ShowDetailHistoryController: " + e.getMessage());
