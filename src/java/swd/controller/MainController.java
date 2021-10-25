@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author mevrthisbang
  */
 public class MainController extends HttpServlet {
-    
+
     private static final String ERROR = "error.jsp";
     private static final String LOGIN = "LoginController";
     private static final String SEARCH = "SearchController";
@@ -34,8 +34,10 @@ public class MainController extends HttpServlet {
     private static final String REMOVE = "RemoveFromCartController";
     private static final String ORDER = "OrderController";
     private static final String UPDATECART = "UpdateQuantityInCartController";
-    private static final String PAYPAL="PaypalController";
-    
+    private static final String PAYPAL = "PaypalController";
+    private static final String SHOPPINGHISTORY = "ShoppingHistoryController";
+    private static final String SHOWDETAILHISTORY = "ShowDetailHistoryController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -46,35 +48,39 @@ public class MainController extends HttpServlet {
                 url = SEARCH;
             } else if (action.equals("Login")) {
                 url = LOGIN;
-            }else if (action.equals("LoginWithGoogle")) {
+            } else if (action.equals("LoginWithGoogle")) {
                 url = LOGINWITHGOOGLE;
-            }else if (action.equals("Create")) {
+            } else if (action.equals("Create")) {
                 url = CREATE;
-            }else if (action.equals("Edit")) {
+            } else if (action.equals("Edit")) {
                 url = LOADBYPRIMARYKEY;
             } else if (action.equals("Update")) {
                 url = UPDATE;
-            }else if (action.equals("Delete")) {
+            } else if (action.equals("Delete")) {
                 url = DISABLE;
-            }else if (action.equals("Logout")) {
+            } else if (action.equals("Logout")) {
                 url = LOGOUT;
-            }else if (action.equals("load_more")) {
+            } else if (action.equals("load_more")) {
                 url = LOADMORE;
-            }else if (action.equals("Register")) {
+            } else if (action.equals("Register")) {
                 url = REGISTER;
-            }else if (action.equals("AddToCart")) {
+            } else if (action.equals("AddToCart")) {
                 url = ADDTOCART;
-            }else if (action.equals("searchByCategory")) {
+            } else if (action.equals("searchByCategory")) {
                 url = SEARCHBYCATEGORY;
-            }else if (action.equals("Remove")) {
+            } else if (action.equals("Remove")) {
                 url = REMOVE;
             } else if (action.equals("Confirm Order")) {
                 url = ORDER;
             } else if (action.equals("Update Cart")) {
                 url = UPDATECART;
-            }else if(action.equals("paypal")){
-                url=PAYPAL;
-            }else{
+            } else if (action.equals("paypal")) {
+                url = PAYPAL;
+            } else if (action.equals("shoppingHistory")) {
+                url = SHOPPINGHISTORY;
+            } else if (action.equals("showDetailHistory")) {
+                url = SHOWDETAILHISTORY;
+            } else {
                 request.setAttribute("ERROR", "Your action is invalid");
             }
         } catch (Exception e) {

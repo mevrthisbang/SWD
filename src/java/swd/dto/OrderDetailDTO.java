@@ -19,7 +19,7 @@ public class OrderDetailDTO implements Serializable{
     public OrderDetailDTO() {
     }
 
-    public OrderDetailDTO(String orderDetailID, String orderID, String productID, String reviewComment, float price, float reviewRating, int quantity) {
+    public OrderDetailDTO(String orderDetailID, String orderID, String productID, float reviewRating,  String reviewComment, int quantity, float price) {
         this.orderDetailID = orderDetailID;
         this.orderID = orderID;
         this.productID = productID;

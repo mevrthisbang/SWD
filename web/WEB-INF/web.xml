@@ -68,6 +68,14 @@
         <servlet-name>PaypalController</servlet-name>
         <servlet-class>swd.controller.PaypalController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShoppingHistoryController</servlet-name>
+        <servlet-class>swd.controller.ShoppingHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowDetailHistoryController</servlet-name>
+        <servlet-class>swd.controller.ShowDetailHistoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -135,6 +143,14 @@
     <servlet-mapping>
         <servlet-name>PaypalController</servlet-name>
         <url-pattern>/PaypalController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShoppingHistoryController</servlet-name>
+        <url-pattern>/ShoppingHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowDetailHistoryController</servlet-name>
+        <url-pattern>/ShowDetailHistoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
