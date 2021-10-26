@@ -47,6 +47,7 @@ public class AddToCartController extends HttpServlet {
                     product.setDescription("");
                     cart.addToCart(product);
                     session.setAttribute("CART", cart);
+                    request.setAttribute("ADDSUCESS", "true");
                 } else {
                     url = ERROR;
                     request.setAttribute("ERROR", "You do not have permission to do this");

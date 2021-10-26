@@ -70,7 +70,6 @@
                                         <th scope="col">Product name</th>
                                         <th scope="col">Product price</th>
                                         <th scope="col">Quantity</th>
-                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,18 +98,6 @@
                                             <td>
                                                 ${product.quantity}
                                             </td>
-                                            <td>
-                                                <c:if test="${sessionScope.HISTORYINFO.status eq 'Completed'}">
-                                                    <c:url var="review" value="MainController">
-                                                        <c:param name="action" value="reviewProduct"/>
-                                                        <c:param name="orderDetailID" value="${product.orderDetailID}"/>
-                                                    </c:url>
-                                                    <a href="${review}">Review</a>
-                                                </c:if>
-                                                <c:if test="${sessionScope.HISTORYINFO.status ne 'Completed'}">
-                                                    Can't write review before completed order
-                                                </c:if>
-                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -124,6 +111,18 @@
                                     <li>Payment: ${sessionScope.PAYMENTDETAIL.paymendMethod}</li>
                                 </ul>
                             </div>
+                        </div>
+                        <div class="buttonHistoryDetail">
+                            <form>
+                                <c:if test="${sessionScope.HISTORYINFO.status eq 'Completed'}">
+                                    <input class="btn" value="Cancel Review" name="action" type="submit" />
+                                    <input type="hidden" name="orderID" value="${sessionScope.HISTORYINFO.orderID}"/>
+                                    <input class="btn" value="Review Product" name="action" type="submit" />
+                                </c:if>
+                                <c:if test="${sessionScope.HISTORYINFO.status ne 'Completed'}">
+                                    Can't write review before completed order
+                                </c:if>
+                            </form>
                         </div>
                     </c:if>
                 </c:if>

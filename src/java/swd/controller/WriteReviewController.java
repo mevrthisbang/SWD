@@ -6,6 +6,9 @@
 package swd.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import swd.dao.ReviewDAO;
 import swd.dto.AccountDTO;
+import swd.dto.ProductDTO;
 import swd.dto.ReviewDTO;
 
 /**
@@ -39,31 +43,59 @@ public class WriteReviewController extends HttpServlet {
         String url = ERROR;
         String idCus;
         try {
-            String orderID = request.getParameter("orderID");
-            String productID = request.getParameter("productID");
-            String reviewContent = request.getParameter("txtComment");
-            String reviewRate = request.getParameter("rate");
-            ReviewDAO daoReview = new ReviewDAO();
+            String reviewContent = null;
+            String reviewRate = null;
             HttpSession session = request.getSession();
+            ReviewDAO daoReview = new ReviewDAO();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
-            String status = "Submitted";
             if (loginUser != null) {
                 if (loginUser.getRole().equals("customer")) {
-                    idCus = loginUser.getId();
-                    String reviewID;
-                    String lastID = daoReview.getLastReviewID();
-                    if (lastID == null) {
-                        reviewID = "R-1";
-                    } else {
-                        String currentNum = lastID.substring(1);
-                        int num = Integer.parseInt(currentNum);
-                        num = num + 1;
-                        reviewID = "R-" + num;
+                    List<ProductDTO> listProduct = (List) session.getAttribute("PRODUCTLISTREVIEW");
+                    Map<String, String> mapCR = null;
+                    Map<String, Map> mapItem = new HashMap<>();
+                    for (ProductDTO productDTO : listProduct) {
+                        mapCR = new HashMap<>();
+                        reviewContent = request.getParameter("txtComment" + productDTO.getProductID());
+                        reviewRate = request.getParameter("rate" + productDTO.getProductID());
+                        mapCR.put(reviewContent, reviewRate);
+                        mapItem.put(productDTO.getProductID(), mapCR);
                     }
-                    ReviewDTO dtoReview = new ReviewDTO(reviewID, idCus, productID, orderID, reviewContent, status, Float.parseFloat(reviewRate));
-                    boolean result = daoReview.createReview(dtoReview);
-                    if (result) {
-                        url = ORDER_HISTORY;
+                    if (mapItem.size() > 0) {
+                        if (mapCR.size() > 0) {
+                            for (String string : mapItem.keySet()) {
+                                for (ProductDTO productDTO : listProduct) {
+                                    if (productDTO.getProductID().equals(string)) {
+                                        Map<String, String> value = mapItem.get(string);
+                                        String inputComment = "";
+                                        String inputRate = "5";
+                                        for (String String : value.keySet()) {
+                                            inputComment = String;
+                                            inputRate = value.get(String);
+                                        }
+                                        String status = "Submitted";
+                                        String orderID = (String) session.getAttribute("TEMPORDER");
+                                        idCus = loginUser.getId();
+                                        String reviewID;
+                                        String lastID = daoReview.getLastReviewID();
+                                        if (lastID == null) {
+                                            reviewID = "R-1";
+                                        } else {
+                                            String currentNum = lastID.substring(2);
+                                            int num = Integer.parseInt(currentNum);
+                                            num = num + 1;
+                                            reviewID = "R-" + num;
+                                        }
+                                        
+                                        ReviewDTO dtoReview = new ReviewDTO(reviewID, idCus, productDTO.getProductID(), orderID, inputComment, status, Float.parseFloat(inputRate));
+                                        boolean result = daoReview.createReview(dtoReview);
+                                        if (result) {
+                                            url = ORDER_HISTORY;
+                                            request.setAttribute("AFTERREVIEW", "true");
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             } else {

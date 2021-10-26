@@ -6,7 +6,10 @@
 package swd.controller;
 
 import java.io.IOException;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,19 +55,20 @@ public class ReviewProductController extends HttpServlet {
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
             if (loginUser != null) {
                 if (loginUser.getRole().equals("customer")) {
-                    url = REVIEW;
-                    String orderDetailID = request.getParameter("orderDetailID");
-                    OrderDetailDTO dtoOrderDetail = detailDAO.getOrderDetail(orderDetailID);
-                    ProductDTO dtoProduct = productDAO.getProductByPrimaryKey(dtoOrderDetail.getProductID());
-                    String price = dtoProduct.getPrice() + "";
-                    Map<String,String> mapInfo = new HashMap<>();
-                    mapInfo.put("Image", dtoProduct.getImg());
-                    mapInfo.put("Name", dtoProduct.getName());
-                    mapInfo.put("Price", price);
-                    mapInfo.put("Desscription", dtoProduct.getDescription());
-                    session.setAttribute("PRODUCTREVIEW", mapInfo);
-                    session.setAttribute("ORDERIDREVIEW", dtoOrderDetail.getOrderID());
-                    session.setAttribute("PRODUCTIDREVIEW", dtoProduct.getProductID());
+                    String orderID = request.getParameter("orderID");
+                    List<OrderDetailDTO> listOrderDetail = (List) session.getAttribute("HISTORYDETAIL");
+                    if(listOrderDetail.size() > 0) {
+                        List<ProductDTO> listProduct = new ArrayList<>();
+                        for (OrderDetailDTO orderDetailDTO : listOrderDetail) {
+                            ProductDTO dtoProduct = productDAO.getProductByPrimaryKey(orderDetailDTO.getProductID());
+                            listProduct.add(dtoProduct);
+                        }
+                        if(listProduct.size() > 0) {
+                            url = REVIEW;
+                            session.setAttribute("PRODUCTLISTREVIEW", listProduct);
+                            session.setAttribute("TEMPORDER", orderID);
+                        }
+                    }
                 }
             } else {
                 url = ERROR;
