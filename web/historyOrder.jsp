@@ -110,7 +110,6 @@
                                         <th scope="col">Address</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Cancel Order</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -134,16 +133,6 @@
                                             </td>
                                             <td>
                                                 ${product.status}
-                                            </td>
-                                            <td>
-                                                <c:if test="${product.status eq 'Canceled' or product.status eq 'Completed'}">
-                                                    <font color="red">
-                                                    Can't cancel order
-                                                    </font>
-                                                </c:if>
-                                                <c:if test="${product.status eq 'Delivering' or product.status eq 'Wait for Confirmation' or product.status eq 'Confirmed'}">
-                                                    <a>Cancel the order</a>
-                                                </c:if>
                                             </td>
                                             <td>
                                                 <c:url var="showDetailHistory" value="MainController">
