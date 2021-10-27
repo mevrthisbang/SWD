@@ -11,6 +11,9 @@
         <!------ Include the above in your HEAD tag ---------->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link href="css/style_2.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
@@ -79,8 +82,8 @@
         </div>
 
         <jsp:include page="footer.jsp"></jsp:include>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
                             function loadMore() {
                                 var amount = document.getElementsByClassName("product").length;
                                 $.ajax({
@@ -115,7 +118,19 @@
                                     }
                                 });
                             }
-        </script>  
-    </body>
-</html>
+            </script>  
+        </body>
+    </html>
+<c:if test="${requestScope.ADDSUCESS eq 'true'}">
+    <script>
+        alertify.set('notifier', 'position', 'bottom-right');
+        alertify.success('Add Successfully!');
+    </script>
+</c:if>
+<c:if test="${requestScope.SUCCESS eq 'Order Successfully!'}">
+    <script>
+        alertify.set('notifier', 'position', 'bottom-right');
+        alertify.success('Order Successfully!');
+    </script>
+</c:if>
 

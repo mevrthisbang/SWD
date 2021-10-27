@@ -85,7 +85,6 @@ public class OrderController extends HttpServlet {
                         errorObj.setAddressError("Not supposed to be empty");
                     }
                     if (check) {
-
                         OrderDAO dao = new OrderDAO();
                         String lastOrderIDByCustomer = dao.getLastOrderIDByCustomer(loginUser.getId());
                         String orderID;

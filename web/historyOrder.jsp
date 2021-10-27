@@ -13,8 +13,11 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>Order History</title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
-            <link href="css/style_1.css" rel="stylesheet"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
+            <link rel="stylesheet" href="css/style_1.css"/>
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+            <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         </head>
         <style>
             #formSubmit{
@@ -159,6 +162,12 @@
             </div>
         </body>
     </html>
+    <c:if test="${requestScope.AFTERREVIEW eq 'true'}">
+        <script>
+            alertify.set('notifier', 'position', 'bottom-right');
+            alertify.success('Review success');
+        </script>
+    </c:if>
 </c:if>
 <c:if test="${!testRole}">
     <c:set var="ERROR" value="You do not have permission to access this" scope="request"/>

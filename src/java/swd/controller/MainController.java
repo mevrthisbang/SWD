@@ -81,7 +81,7 @@ public class MainController extends HttpServlet {
                 url = SHOPPINGHISTORY;
             } else if (action.equals("showDetailHistory")) {
                 url = SHOWDETAILHISTORY;
-            } else if (action.equals("reviewProduct")) {
+            } else if (action.equals("Review Product")) {
                 url = REVIEWPRODUCT;
             } else if (action.equals("Review")) {
                 url = WRITEREVIEW;
