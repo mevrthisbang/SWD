@@ -6,6 +6,7 @@
 package swd.controller;
 
 import java.io.IOException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,17 +18,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import swd.dao.OrderDAO;
 import swd.dao.OrderDetailDAO;
+import swd.dao.PaymentDetailDAO;
+import swd.dao.ProductDAO;
 import swd.dto.AccountDTO;
-import swd.dto.OrderDTO;
 import swd.dto.OrderDetailDTO;
+import swd.dto.ProductDTO;
 
 /**
  *
  * @author Admin
  */
-public class ShoppingHistoryController extends HttpServlet {
+public class ReviewProductController extends HttpServlet {
 
-    private static final String ORDER_HISTORY = "historyOrder.jsp";
+    private static final String REVIEW = "review.jsp";
     private static final String ERROR = "error.jsp";
 
     /**
@@ -43,27 +46,36 @@ public class ShoppingHistoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String idCus = null;
         try {
+            PaymentDetailDAO paymentDAO = new PaymentDetailDAO();
             OrderDAO orderDAO = new OrderDAO();
             OrderDetailDAO detailDAO = new OrderDetailDAO();
-            String statusInput = request.getParameter("cbStatus");
+            ProductDAO productDAO = new ProductDAO();
             HttpSession session = request.getSession();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("USER");
             if (loginUser != null) {
                 if (loginUser.getRole().equals("customer")) {
-                    url = ORDER_HISTORY;
-                    idCus = loginUser.getId();
-                    orderDAO.getListOrderOfUserByStatus(idCus, statusInput);
-                    List<OrderDTO> listOrderOfCustomer = orderDAO.ListOrderOfUser();
-                    session.setAttribute("ORDERHISTORY", listOrderOfCustomer);
-                } else {
-                    url = ERROR;
-                    request.setAttribute("ERROR", "You do not have permission to do this");
+                    String orderID = request.getParameter("orderID");
+                    List<OrderDetailDTO> listOrderDetail = (List) session.getAttribute("HISTORYDETAIL");
+                    if(listOrderDetail.size() > 0) {
+                        List<ProductDTO> listProduct = new ArrayList<>();
+                        for (OrderDetailDTO orderDetailDTO : listOrderDetail) {
+                            ProductDTO dtoProduct = productDAO.getProductByPrimaryKey(orderDetailDTO.getProductID());
+                            listProduct.add(dtoProduct);
+                        }
+                        if(listProduct.size() > 0) {
+                            url = REVIEW;
+                            session.setAttribute("PRODUCTLISTREVIEW", listProduct);
+                            session.setAttribute("TEMPORDER", orderID);
+                        }
+                    }
                 }
+            } else {
+                url = ERROR;
+                request.setAttribute("ERROR", "You do not have permission to do this");
             }
         } catch (Exception e) {
-            log("ERROR at ShoppingHistoryController: " + e.getMessage());
+            log("ERROR at ReviewProductController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

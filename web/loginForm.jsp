@@ -27,13 +27,11 @@
                 <div class="textbox">
                     <input type="text" placeholder="Enter email" name="txtEmail" value="${param.txtUsername}"/>
                     <i class="fas fa-user fa-lg fa-fw" aria-hidden="true"></i>
-
                 </div>
                 <p >Password</p>
                 <div class="textbox">
                     <input type="password" placeholder="Enter Password" name="txtPassword" value=""/>
                     <i class="fas fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-
                 </div>
                 <input class="btn" value="Login" name="action" type="submit" />
                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/SWD_TechnologyProduct/MainController?action=LoginWithGoogle&response_type=code
