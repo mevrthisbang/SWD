@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/controller/MainController.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/web/META-INF/context.xml</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/dto/ProductDTO.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/web/menu.jsp</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/web/adminHome.jsp</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/dao/ProductDAO.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/controller/OrderController.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/controller/SearchByCategoryController.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/controller/UpdateQuantityInCartController.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/controller/UpdateController.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/web/guestCustomerHome.jsp</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/controller/ViewDetailController.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/controller/GetProductByPrmaryKeyController.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/src/java/swd/controller/SearchController.java</file>
-            <file>file:/D:/Hoc/SWD391/GroupProject/web/productDetail.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

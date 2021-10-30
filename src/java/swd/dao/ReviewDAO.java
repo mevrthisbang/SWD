@@ -87,7 +87,7 @@ public class ReviewDAO {
         }
         return check;
     }
-    
+
     public List<ReviewDTO> getTop5ReviewsByProductID(String productID) throws Exception {
         List<ReviewDTO> result = null;
         ReviewDTO dto = null;
