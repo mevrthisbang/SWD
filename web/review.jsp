@@ -42,6 +42,7 @@
                                                 <c:param name="action" value="shoppingHistory"/>
                                             </c:url>
                                         <li><a href="${historyLink}">Order History</a></li>
+                                        <li><a href="">Profile</a></li>
                                             <c:url var="logoutLink" value="MainController">
                                                 <c:param name="action" value="Logout"/>
                                             </c:url>
@@ -90,7 +91,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="rate">
-                                                        <input type="radio" id="star5" name="rate${productInfo.productID}" value="5" />
+                                                        <input type="radio" id="star5" name="rate${productInfo.productID}" value="5" checked="true"/>
                                                         <label for="star5" title="text">5 stars</label>
                                                         <input type="radio" id="star4" name="rate${productInfo.productID}" value="4" />
                                                         <label for="star4" title="text">4 stars</label>
@@ -115,8 +116,8 @@
                                     </tbody>
                                 </table>
                                 <div>
-                                    <input class="btn" value="Cancel Review" name="action" type="submit" />
-                                    <input class="btn" value="Review" name="action" type="submit" />
+                                    <input class="btn btn-primary" value="Cancel Review" name="action" type="submit" />
+                                    <input class="btn btn-primary" value="Review" name="action" type="submit" />
                                 </div>
                             </form>
                         </div>

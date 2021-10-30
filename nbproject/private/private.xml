@@ -8,11 +8,18 @@
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/historyOrder.jsp</file>
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/OrderDAO.java</file>
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/updateForm.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/adminHome.jsp</file>
-            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/db/DBConnection.java</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/PaymentDAO.java</file>
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/cart.jsp</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/historyDetail.jsp</file>
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/createForm.jsp</file>
             <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/OrderController.java</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/review.jsp</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/paypal/PaypalPaymentServices.java</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/ShowDetailHistoryController.java</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/dao/PaymentDetailDAO.java</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/web/adminHome.jsp</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/db/DBConnection.java</file>
+            <file>file:/D:/Code/Java/SWD_TechnologyProduct/src/java/swd/controller/LoginWithGoogleController.java</file>
         </group>
     </open-files>
 </project-private>

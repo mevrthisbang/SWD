@@ -18,7 +18,7 @@ public class DBConnection implements Serializable{
     public static Connection getMyConnection() throws Exception{
         Connection conn=null;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SWD_Assignment_TechnologyProduct", "sa", "1");
+        conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=SWD_Assignment_TechnologyProduct", "sa", "2!Idolphuc");
         return conn;
     }
 }
