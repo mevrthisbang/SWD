@@ -76,6 +76,10 @@
         <servlet-name>ShowDetailHistoryController</servlet-name>
         <servlet-class>swd.controller.ShowDetailHistoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewDetailController</servlet-name>
+        <servlet-class>swd.controller.ViewDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>ShowDetailHistoryController</servlet-name>
         <url-pattern>/ShowDetailHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailController</servlet-name>
+        <url-pattern>/ViewDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
