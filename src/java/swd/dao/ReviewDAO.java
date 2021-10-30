@@ -6,8 +6,11 @@
 package swd.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import swd.db.DBConnection;
 import swd.dto.ReviewDTO;
 
@@ -83,5 +86,37 @@ public class ReviewDAO {
             closeConnection();
         }
         return check;
+    }
+
+    public List<ReviewDTO> getTop5ReviewsByProductID(String productID) throws Exception {
+        List<ReviewDTO> result = null;
+        ReviewDTO dto = null;
+        try {
+            conn = DBConnection.getMyConnection();
+            String sql = "Select top 5 reviewID, customer, orderID,"
+                    + " review_rate, review_comment, status,"
+                    + " create_at, update_at From REVIEW\n"
+                    + "Where productID=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, productID);
+            rs = preStm.executeQuery();
+            result = new ArrayList<>();
+            while (rs.next()) {
+                String reviewID = rs.getString("reviewID");
+                String customerID = rs.getString("customer");
+                String order = rs.getString("orderID");
+                float reviewRate = rs.getFloat("review_rate");
+                String reviewComment = rs.getString("review_comment");
+                String reviewStatus = rs.getString("status");
+                Date reviewCreateDate = rs.getDate("create_at");
+                Date reviewUpdateDate = rs.getDate("update_at");
+                dto = new ReviewDTO(reviewID, customerID, productID, order, reviewComment, reviewStatus, reviewCreateDate, reviewUpdateDate, reviewRate);
+                result.add(dto);
+            }
+        } finally {
+            closeConnection();
+        }
+        System.out.println("here");
+        return result;
     }
 }

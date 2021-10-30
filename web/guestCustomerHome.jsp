@@ -49,8 +49,11 @@
                                     <img class="card-img-top" src="${o.img}" alt="Card image cap" style="object-fit: cover;width: 200px;
                                          height: 150px;">
                                     <div class="card-body">
-
-                                        <h4 class="card-title show_txt"><a href="#" title="View Product">${o.name}</a></h4>
+                                        <c:url var="viewDetail" value="MainController">
+                                            <c:param name="action" value="ViewProductDetail"/>
+                                            <c:param name="id" value="${o.productID}"/>
+                                        </c:url>
+                                        <h4 class="card-title show_txt"><a href="${viewDetail}" title="View Product">${o.name}</a></h4>
                                         <p class="card-text show_txt">${o.name}</p>
                                         <div class="row">
                                             <div class="col" style="text-align: center;">
