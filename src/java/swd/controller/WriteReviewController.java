@@ -67,10 +67,13 @@ public class WriteReviewController extends HttpServlet {
                                     if (productDTO.getProductID().equals(string)) {
                                         Map<String, String> value = mapItem.get(string);
                                         String inputComment = "";
-                                        String inputRate = "5";
+                                        String inputRate = "";
                                         for (String String : value.keySet()) {
                                             inputComment = String;
                                             inputRate = value.get(String);
+                                        }
+                                        if(inputRate == null) {
+                                            inputRate = "5";
                                         }
                                         String status = "Submitted";
                                         String orderID = (String) session.getAttribute("TEMPORDER");
@@ -85,7 +88,6 @@ public class WriteReviewController extends HttpServlet {
                                             num = num + 1;
                                             reviewID = "R-" + num;
                                         }
-                                        
                                         ReviewDTO dtoReview = new ReviewDTO(reviewID, idCus, productDTO.getProductID(), orderID, inputComment, status, Float.parseFloat(inputRate));
                                         boolean result = daoReview.createReview(dtoReview);
                                         if (result) {

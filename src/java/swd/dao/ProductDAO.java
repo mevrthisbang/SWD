@@ -434,7 +434,7 @@ public class ProductDAO {
         String id, name, img;
         float price;
         String query = "select productID, name, price, img from PRODUCT\n"
-                + "where category = ?";
+                + "where category = ? and status = 'Active'";
         try {
             conn = DBConnection.getMyConnection();
             preStm = conn.prepareStatement(query);
