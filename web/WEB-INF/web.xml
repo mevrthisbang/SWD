@@ -77,12 +77,16 @@
         <servlet-class>swd.controller.ShowDetailHistoryController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ReviewProductController</servlet-name>
-        <servlet-class>swd.controller.ReviewProductController</servlet-class>
+        <servlet-name>ViewDetailController</servlet-name>
+        <servlet-class>swd.controller.ViewDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WriteReviewController</servlet-name>
         <servlet-class>swd.controller.WriteReviewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviewProductController</servlet-name>
+        <servlet-class>swd.controller.ReviewProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -161,12 +165,16 @@
         <url-pattern>/ShowDetailHistoryController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ReviewProductController</servlet-name>
-        <url-pattern>/ReviewProductController</url-pattern>
+        <servlet-name>ViewDetailController</servlet-name>
+        <url-pattern>/ViewDetailController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>WriteReviewController</servlet-name>
         <url-pattern>/WriteReviewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewProductController</servlet-name>
+        <url-pattern>/ReviewProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
