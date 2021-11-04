@@ -92,6 +92,7 @@ public class ReviewDAO {
     public List<ReviewDTO> getTop5ReviewsByProductID(String productID) throws Exception {
         List<ReviewDTO> result = null;
         ReviewDTO dto = null;
+        String customerName = null;
         try {
             conn = DBConnection.getMyConnection();
             String sql = "Select top 5 reviewID, customer, orderID,"
@@ -111,7 +112,6 @@ public class ReviewDAO {
                 String reviewStatus = rs.getString("status");
                 Date reviewCreateDate = rs.getDate("create_at");
                 Date reviewUpdateDate = rs.getDate("update_at");
-                String customerName = getUserFullName(customerID);
                 dto = new ReviewDTO(reviewID, customerID, customerName,
                         productID, order, reviewComment, reviewStatus,
                         reviewCreateDate, reviewUpdateDate, reviewRate);
