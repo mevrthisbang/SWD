@@ -46,7 +46,7 @@ public class ViewDetailController extends HttpServlet {
             ProductDAO dao = new ProductDAO();
             ProductDTO product = dao.getProductByPrimaryKey(productID);
             ReviewDAO rdao = new ReviewDAO();
-            List<ReviewDTO> listReview = rdao.getTop5ReviewsByProductID(productID);
+            List<ReviewDTO> listReview = rdao.getAllReviewsByProductID(productID);
             url = PRODUCT_DETAIL;
             request.setAttribute("product", product);
             if(!listReview.isEmpty()){

@@ -136,7 +136,7 @@
                                     <div class="col-md-10">
                                         <article class="card-body p-3">
                                             <p>
-                                                <a class="float-left" href="#"><strong>${review.customerID}</strong></a>
+                                                <a class="float-left" href="#"><strong>${review.customerName}</strong></a>
                                                 <p class="text-secondary float-left">${review.createDate}</p>
                                                 <c:forEach var="i" begin="1" end="${review.rating}">
                                                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
