@@ -43,6 +43,7 @@
                                                 <c:param name="action" value="shoppingHistory"/>
                                             </c:url>
                                         <li><a href="${historyLink}">Order History</a></li>
+                                        <li><a href="#">Profile</a></li>
                                             <c:url var="logoutLink" value="MainController">
                                                 <c:param name="action" value="Logout"/>
                                             </c:url>

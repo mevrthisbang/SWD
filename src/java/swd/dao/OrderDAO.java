@@ -160,4 +160,32 @@ public class OrderDAO implements Serializable {
             closeConnection();
         }
     }
+    
+    public OrderDTO getOrderByID(String orderID) throws Exception {
+        OrderDTO dto = null;
+        try {
+            conn = DBConnection.getMyConnection();
+            if (conn != null) {
+                String sql = "SELECT orderID, customer, buyerName, buyDate, "
+                        + "phone, shipAddress, total, status FROM ORDER_PRODUCT "
+                        + "Where orderID = ? Order by buyDate DESC";
+                preStmOrder = conn.prepareStatement(sql);
+                preStmOrder.setString(1, orderID);
+                rs = preStmOrder.executeQuery();
+                while (rs.next()) {
+                    String customer = rs.getString("customer");
+                    String buyerName = rs.getString("buyerName");
+                    Date date = formatter.parse(rs.getString("buyDate"));
+                    String phone = rs.getString("phone");
+                    String shipAddress = rs.getString("shipAddress");
+                    Float total = rs.getFloat("total");
+                    String status = rs.getString("status");
+                    dto = new OrderDTO(orderID, customer, buyerName, date, phone, shipAddress, total, status);
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return dto;
+    }
 }

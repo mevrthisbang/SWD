@@ -49,29 +49,29 @@
         <jsp:include page="menu.jsp"></jsp:include>
         <c:set var="product" value="${requestScope.product}"/>
         <section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">In a World of Technology, People Make the Difference.</h1>
-        <p class="lead text-muted mb-0">We’re in IT Business since 1999</p>
-    </div>
-</section>
             <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
+                <h1 class="jumbotron-heading">In a World of Technology, People Make the Difference.</h1>
+                <p class="lead text-muted mb-0">We’re in IT Business since 1999</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
                             <c:url var = "homeLink" value="MainController">
                                 <c:param name="action" value="Search"/>
                             </c:url>
-                                <li class="breadcrumb-item"><a href="${homeLink}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">${product.name}</a></li>
-                            </ol>
-                        </nav>
-                    </div>
+                            <li class="breadcrumb-item"><a href="${homeLink}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">${product.name}</a></li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <jsp:include page="left.jsp"></jsp:include>
+        </div>
+        <div class="container">
+            <div class="row">
+                <jsp:include page="left.jsp"></jsp:include>
                     <div class="col-sm-9">
                         <div class="container">
                             <div class="card">
@@ -130,7 +130,25 @@
                             </div> <!-- row.// -->
                         </div> <!-- card.// -->
 
-
+                        <c:forEach items="${requestScope.listReview}" var="review">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <article class="card-body p-3">
+                                            <p>
+                                                <a class="float-left" href="#"><strong>${review.customerName}</strong></a>
+                                                <p class="text-secondary float-left">${review.createDate}</p>
+                                                <c:forEach var="i" begin="1" end="${review.rating}">
+                                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                                </c:forEach>
+                                            </p>
+                                            <div class="clearfix"></div>
+                                            <p>${review.content}</p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
 

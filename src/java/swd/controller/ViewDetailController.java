@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import swd.dao.ProductDAO;
+import swd.dao.ReviewDAO;
 import swd.dto.ProductDTO;
+import swd.dto.ReviewDTO;
 
 /**
  *
@@ -43,9 +45,13 @@ public class ViewDetailController extends HttpServlet {
             String productID = request.getParameter("id");
             ProductDAO dao = new ProductDAO();
             ProductDTO product = dao.getProductByPrimaryKey(productID);
+            ReviewDAO rdao = new ReviewDAO();
+            List<ReviewDTO> listReview = rdao.getAllReviewsByProductID(productID);
             url = PRODUCT_DETAIL;
             request.setAttribute("product", product);
-            
+            if(!listReview.isEmpty()){
+                request.setAttribute("listReview", listReview);
+            }            
         } catch (Exception e) {
             log("ERROR at ViewDetailController: " + e.getMessage());
         } finally {
