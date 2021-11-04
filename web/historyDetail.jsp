@@ -42,6 +42,7 @@
                                                 <c:param name="action" value="shoppingHistory"/>
                                             </c:url>
                                         <li><a href="${historyLink}">Order History</a></li>
+                                        <li><a href="#">Profile</a></li>
                                             <c:url var="logoutLink" value="MainController">
                                                 <c:param name="action" value="Logout"/>
                                             </c:url>
@@ -108,16 +109,22 @@
                                     <li>Phone: ${sessionScope.HISTORYINFO.phone}</li>
                                     <li>Address: ${sessionScope.HISTORYINFO.shippingAddress}</li>
                                     <li>Total: ${sessionScope.HISTORYINFO.total}</li>
-                                    <li>Payment: ${sessionScope.PAYMENTDETAIL.paymendMethod}</li>
+                                    <li>Payment: 
+                                        <c:if test="${sessionScope.PAYMENTDETAIL.paymendMethod eq 'P-1'}" var="testPayment">
+                                            Cash on Delivery
+                                        </c:if>
+                                            <c:if test="${!testPayment}">
+                                            Paypal
+                                        </c:if>
+                                        </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="buttonHistoryDetail">
                             <form>
                                 <c:if test="${sessionScope.HISTORYINFO.status eq 'Completed'}">
-                                    <input class="btn" value="Cancel Review" name="action" type="submit" />
                                     <input type="hidden" name="orderID" value="${sessionScope.HISTORYINFO.orderID}"/>
-                                    <input class="btn" value="Review Product" name="action" type="submit" />
+                                    <input class="btn-primary" value="Review Product" name="action" type="submit" />
                                 </c:if>
                                 <c:if test="${sessionScope.HISTORYINFO.status ne 'Completed'}">
                                     Can't write review before completed order
