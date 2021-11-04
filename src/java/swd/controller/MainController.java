@@ -39,6 +39,10 @@ public class MainController extends HttpServlet {
     private static final String REVIEWPRODUCT = "ReviewProductController";
     private static final String WRITEREVIEW = "WriteReviewController";
     private static final String VIEWPRODUCTDETAIL = "ViewDetailController";
+    private static final String ORDER_LIST = "ShowListOrderController";
+    private static final String SEARCH_ORDER = "SearchOrderController";
+    private static final String ORDER_DETAIL = "ShowOrderDetailController";
+    private static final String UPDATE_ORDER_STATUS = "UpdateOrderStatusController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -90,7 +94,15 @@ public class MainController extends HttpServlet {
                 url = SHOPPINGHISTORY;
             } else if (action.equals("ViewProductDetail")) {
                 url = VIEWPRODUCTDETAIL;
-            } else {
+            }   else if (action.equals("orderList")) {
+                url = ORDER_LIST;
+            }   else if (action.equals("Search Order")) {
+                url = SEARCH_ORDER;
+            }   else if (action.equals("orderDetail")) {
+                url = ORDER_DETAIL;
+            }   else if (action.equals("Update Status")) {
+                url = UPDATE_ORDER_STATUS;
+            }   else {
                 request.setAttribute("ERROR", "Your action is invalid");
             }
         } catch (Exception e) {

@@ -16,13 +16,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.naming.NamingException;
+
 import swd.db.DBConnection;
 import swd.dto.OrderDTO;
 import swd.dto.PaymentDetailDTO;
 import swd.dto.ProductDTO;
 
 /**
- *
  * @author mevrthisbang
  */
 public class OrderDAO implements Serializable {
@@ -35,9 +35,14 @@ public class OrderDAO implements Serializable {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyyy-MM-dd hh:mm:ss");
 
     private List<OrderDTO> listOrderOfUser;
+    private List<OrderDTO> listOrder;
 
     public List<OrderDTO> ListOrderOfUser() throws NamingException, SQLException {
         return listOrderOfUser;
+    }
+
+    public List<OrderDTO> ListOrder() throws NamingException, SQLException {
+        return listOrder;
     }
 
     private void closeConnection() throws Exception {
@@ -122,6 +127,44 @@ public class OrderDAO implements Serializable {
         return check;
     }
 
+    public void getListOrderByStatus(String statusInput) throws Exception {
+        try {
+            conn = DBConnection.getMyConnection();
+            if (conn != null) {
+                String sql = "SELECT orderID, customer, buyerName, buyDate, "
+                        + "phone, shipAddress, total, status FROM ORDER_PRODUCT "
+                        + "Order by buyDate DESC";
+                if (statusInput != null) {
+                    sql = "SELECT orderID, customer, buyerName, buyDate, "
+                            + "phone, shipAddress, total, status FROM ORDER_PRODUCT "
+                            + "Where status = ? Order by buyDate DESC";
+                }
+                preStmOrder = conn.prepareStatement(sql);
+                if (statusInput != null) {
+                    preStmOrder.setString(1, statusInput);
+                }
+                rs = preStmOrder.executeQuery();
+                while (rs.next()) {
+                    String orderID = rs.getString("orderID");
+                    String customer = rs.getString("customer");
+                    String buyerName = rs.getString("buyerName");
+                    Date date = formatter.parse(rs.getString("buyDate"));
+                    String phone = rs.getString("phone");
+                    String shipAddress = rs.getString("shipAddress");
+                    Float total = rs.getFloat("total");
+                    String status = rs.getString("status");
+                    OrderDTO dto = new OrderDTO(orderID, customer, buyerName, date, phone, shipAddress, total, status);
+                    if (this.listOrder == null) {
+                        this.listOrder = new ArrayList<>();
+                    }
+                    this.listOrder.add(dto);
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+    }
+
     public void getListOrderOfUserByStatus(String idCus, String statusInput) throws Exception {
         try {
             conn = DBConnection.getMyConnection();
@@ -160,7 +203,7 @@ public class OrderDAO implements Serializable {
             closeConnection();
         }
     }
-    
+
     public OrderDTO getOrderByID(String orderID) throws Exception {
         OrderDTO dto = null;
         try {
@@ -168,7 +211,7 @@ public class OrderDAO implements Serializable {
             if (conn != null) {
                 String sql = "SELECT orderID, customer, buyerName, buyDate, "
                         + "phone, shipAddress, total, status FROM ORDER_PRODUCT "
-                        + "Where orderID = ? Order by buyDate DESC";
+                        + "Where orderID = ?";
                 preStmOrder = conn.prepareStatement(sql);
                 preStmOrder.setString(1, orderID);
                 rs = preStmOrder.executeQuery();
@@ -188,4 +231,72 @@ public class OrderDAO implements Serializable {
         }
         return dto;
     }
+
+    public boolean updateStatus(String orderID, String newStatus) throws Exception {
+        boolean check = false;
+        try {
+            conn = DBConnection.getMyConnection();
+            if (conn != null) {
+                String sql = "UPDATE ORDER_PRODUCT "
+                        + "SET status = ? "
+                        + "Where orderID = ?";
+                preStmOrder = conn.prepareStatement(sql);
+                preStmOrder.setString(1, newStatus);
+                preStmOrder.setString(2, orderID);
+                check = preStmOrder.executeUpdate() > 0;
+            }
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+
+    public void searchOrder(String search, Date from, Date to, String statusInput) throws Exception {
+        try {
+            conn = DBConnection.getMyConnection();
+            String sql;
+            if (from != null && to != null) {
+                sql = "SELECT orderID, customer, buyerName, buyDate, "
+                        + "phone, shipAddress, total, status FROM ORDER_PRODUCT "
+                        + "Where (buyerName LIKE ?) \n"
+                        + "AND (buyDate BETWEEN ? AND ?) \n"
+                        + "AND (status LIKE ?) \n"
+                        + "ORDER BY buyDate DESC";
+            } else {
+                sql = "SELECT orderID, customer, buyerName, buyDate, "
+                        + "phone, shipAddress, total, status FROM ORDER_PRODUCT "
+                        + "Where (buyerName LIKE ?) \n"
+                        + "AND (status LIKE ?) \n"
+                        + "ORDER BY buyDate DESC";
+            }
+            preStmOrder = conn.prepareStatement(sql);
+            preStmOrder.setString(1, "%" + search + "%");
+            if (from != null && to != null) {
+                preStmOrder.setDate(2, (java.sql.Date) from);
+                preStmOrder.setDate(3, (java.sql.Date) to);
+                preStmOrder.setString(4, "%" + statusInput + "%");
+            } else {
+                preStmOrder.setString(2, "%" + statusInput + "%");
+            }
+            rs = preStmOrder.executeQuery();
+            while (rs.next()) {
+                String orderID = rs.getString("orderID");
+                String customer = rs.getString("customer");
+                String buyerName = rs.getString("buyerName");
+                Date date = formatter.parse(rs.getString("buyDate"));
+                String phone = rs.getString("phone");
+                String shipAddress = rs.getString("shipAddress");
+                Float total = rs.getFloat("total");
+                String status = rs.getString("status");
+                OrderDTO dto = new OrderDTO(orderID, customer, buyerName, date, phone, shipAddress, total, status);
+                if (this.listOrder == null) {
+                    this.listOrder = new ArrayList<>();
+                }
+                this.listOrder.add(dto);
+            }
+        } finally {
+            closeConnection();
+        }
+    }
+
 }
