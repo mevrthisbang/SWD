@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class ReviewDTO {
 
-    private String reviewID, customerID, productID, orderID, content, status;
+    private String reviewID, customerID, productID, orderID, content, status, customerName;
     private Date createDate, updateDate;
     private Float rating;
 
@@ -39,9 +39,10 @@ public class ReviewDTO {
         this.rating = rating;
     }
 
-    public ReviewDTO(String reviewID, String customerID, String productID, String orderID, String content, String status, Date createDate, Date updateDate, Float rating) {
+    public ReviewDTO(String reviewID, String customerID, String customerName, String productID, String orderID, String content, String status, Date createDate, Date updateDate, Float rating) {
         this.reviewID = reviewID;
         this.customerID = customerID;
+        this.customerName = customerName;
         this.productID = productID;
         this.orderID = orderID;
         this.content = content;
@@ -66,7 +67,15 @@ public class ReviewDTO {
     public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
+    
+    public String getCustomerName() {
+        return customerName;
+    }
 
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+    
     public String getProductID() {
         return productID;
     }

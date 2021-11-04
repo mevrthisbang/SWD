@@ -19,6 +19,7 @@ import swd.dto.ReviewDTO;
  * @author Admin
  */
 public class ReviewDAO {
+
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
@@ -34,7 +35,7 @@ public class ReviewDAO {
             conn.close();
         }
     }
-    
+
     public boolean createReview(ReviewDTO dto) throws Exception {
         boolean check = false;
         try {
@@ -54,8 +55,8 @@ public class ReviewDAO {
             closeConnection();
         }
         return check;
-    } 
-    
+    }
+
     public String getLastReviewID() throws Exception {
         String result = null;
         try {
@@ -73,13 +74,13 @@ public class ReviewDAO {
         }
         return result;
     }
-    
+
     public boolean deleteReview(String reviewID) throws Exception {
         boolean check = false;
         try {
             conn = DBConnection.getMyConnection();
             String sql = "Update REVIEW set status = ? Where reviewID = ?";
-            preStm=conn.prepareStatement(sql);
+            preStm = conn.prepareStatement(sql);
             preStm.setString(1, reviewID);
             check = preStm.executeUpdate() > 0;
         } finally {
@@ -91,6 +92,7 @@ public class ReviewDAO {
     public List<ReviewDTO> getTop5ReviewsByProductID(String productID) throws Exception {
         List<ReviewDTO> result = null;
         ReviewDTO dto = null;
+        String customerName = null;
         try {
             conn = DBConnection.getMyConnection();
             String sql = "Select top 5 reviewID, customer, orderID,"
@@ -110,7 +112,9 @@ public class ReviewDAO {
                 String reviewStatus = rs.getString("status");
                 Date reviewCreateDate = rs.getDate("create_at");
                 Date reviewUpdateDate = rs.getDate("update_at");
-                dto = new ReviewDTO(reviewID, customerID, productID, order, reviewComment, reviewStatus, reviewCreateDate, reviewUpdateDate, reviewRate);
+                dto = new ReviewDTO(reviewID, customerID, customerName,
+                        productID, order, reviewComment, reviewStatus,
+                        reviewCreateDate, reviewUpdateDate, reviewRate);
                 result.add(dto);
             }
         } finally {
@@ -118,5 +122,61 @@ public class ReviewDAO {
         }
         System.out.println("here");
         return result;
+    }
+    
+    public List<ReviewDTO> getAllReviewsByProductID(String productID) throws Exception {
+        List<ReviewDTO> result = null;
+        ReviewDTO dto = null;
+        String customerName = null;
+        try {
+            conn = DBConnection.getMyConnection();
+            String sql = "Select reviewID, customer, orderID,"
+                    + " review_rate, review_comment, status,"
+                    + " create_at, update_at From REVIEW\n"
+                    + "Where productID=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, productID);
+            rs = preStm.executeQuery();
+            result = new ArrayList<>();
+            while (rs.next()) {
+                String reviewID = rs.getString("reviewID");
+                String customerID = rs.getString("customer");
+                String order = rs.getString("orderID");
+                float reviewRate = rs.getFloat("review_rate");
+                String reviewComment = rs.getString("review_comment");
+                String reviewStatus = rs.getString("status");
+                Date reviewCreateDate = rs.getDate("create_at");
+                Date reviewUpdateDate = rs.getDate("update_at");
+                dto = new ReviewDTO(reviewID, customerID, customerName,
+                        productID, order, reviewComment, reviewStatus,
+                        reviewCreateDate, reviewUpdateDate, reviewRate);
+                result.add(dto);
+            }
+            for (ReviewDTO reviewDTO : result) {
+                reviewDTO.setCustomerName(getUserFullName(reviewDTO.getCustomerID()));
+            }
+        } finally {
+            closeConnection();
+        }
+        System.out.println("here");
+        return result;
+    }
+
+    private String getUserFullName(String customerID) throws Exception {
+        String customerName = null;
+        try {
+            //conn = DBConnection.getMyConnection();
+            String sql = "Select fullname From ACCOUNT\n"
+                    + "Where id=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, customerID);
+            rs = preStm.executeQuery();
+            if (rs.next()) {
+                customerName = rs.getString("fullname");
+            }
+        } finally {
+            //closeConnection();
+        }
+        return customerName;
     }
 }
