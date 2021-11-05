@@ -88,6 +88,18 @@
         <servlet-name>ReviewProductController</servlet-name>
         <servlet-class>swd.controller.ReviewProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowListOrderController</servlet-name>
+        <servlet-class>swd.controller.ShowListOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowOrderDetailController</servlet-name>
+        <servlet-class>swd.controller.ShowOrderDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateOrderStatusController</servlet-name>
+        <servlet-class>swd.controller.UpdateOrderStatusController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -175,6 +187,18 @@
     <servlet-mapping>
         <servlet-name>ReviewProductController</servlet-name>
         <url-pattern>/ReviewProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowListOrderController</servlet-name>
+        <url-pattern>/ShowListOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowOrderDetailController</servlet-name>
+        <url-pattern>/ShowOrderDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateOrderStatusController</servlet-name>
+        <url-pattern>/UpdateOrderStatusController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
